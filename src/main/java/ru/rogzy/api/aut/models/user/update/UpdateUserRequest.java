@@ -1,19 +1,19 @@
-package requestes;
+package ru.rogzy.api.aut.models.user.update;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UpdateUserReq {
+public class UpdateUserRequest {
     String name;
     String job;
 
-    public UpdateUserReq() {
+    public UpdateUserRequest() {
         this.name = "John";
         this.job = "Doctor";
     }
 
-    public UpdateUserReq(String name, String job) {
+    public UpdateUserRequest(String name, String job) {
         this.name = name;
         this.job = job;
     }

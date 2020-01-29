@@ -1,18 +1,18 @@
-package requestes;
+package ru.rogzy.api.aut.models.user.create;
 
 import lombok.Getter;
 
 @Getter
-public class CreateUserReq {
+public class CreateUserRequest {
     String name;
     String job;
 
-    public CreateUserReq(String name, String job) {
+    public CreateUserRequest(String name, String job) {
         this.name = name;
         this.job = job;
     }
 
-    public CreateUserReq() {
+    public CreateUserRequest() {
         this.name = "Bob";
         this.job = "Unemployed";
     }

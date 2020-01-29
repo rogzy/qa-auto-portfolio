@@ -8,6 +8,10 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+wrapper {
+    gradleVersion = '5.4.1'
+}
+
 repositories {
     mavenCentral()
 }
@@ -18,8 +22,8 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
 
     //logs
-    implementation 'log4j:log4j:1.2.17'
     implementation 'org.slf4j:slf4j-api:1.7.28'
+    implementation 'org.slf4j:slf4j-simple:1.7.28'
 
     //lombok
     implementation 'org.projectlombok:lombok:1.18.10'
@@ -27,6 +31,7 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
     //guice
     implementation 'com.google.inject:guice:4.2.2'
@@ -36,21 +41,42 @@ dependencies {
     implementation 'org.aeonbits.owner:owner:1.0.8'
 
     //assertion
-    testCompile 'org.assertj:assertj-core:3.14.0'
+    implementation 'org.assertj:assertj-core:3.14.0'
 
     //JUnit 5 Extension
     implementation 'name.falgout.jeffrey.testing.junit5:guice-extension:1.1.1'
 }
 
+def setTestProperty(String prop, Object value) {
+    test.systemProperty(prop, value)
+}
+
+def findProperty(String prop, Object defaultValue) {
+    return project.findProperty(prop) ?: defaultValue
+}
+
+def setTestProperties() {
+    setTestProperty("junit.jupiter.execution.parallel.enabled", findProperty("ci.concurrent", false))
+}
+
 test {
-    useJUnitPlatform()
+    setTestProperties()
+    useJUnitPlatform {
+        def splitter = "&";
+        Object incTags = findProperty('ci.tags.include', false)
+        if (incTags) {
+            includeTags incTags.split(splitter)
+        }
+        Object excTags = findProperty('ci.tags.exclude', false)
+        if (excTags) {
+            excludeTags excTags.split(splitter)
+        }
+    }
 }
 
 allure {
     autoconfigure = true
     version = '2.7.0'
-    
-    
     
     useJUnit5 {
         version = '2.7.0'
