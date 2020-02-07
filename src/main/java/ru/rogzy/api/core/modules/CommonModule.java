@@ -5,6 +5,9 @@ import com.google.inject.Provides;
 import org.aeonbits.owner.ConfigCache;
 import ru.rogzy.api.config.Cfg;
 import ru.rogzy.api.net.NetSteps;
+import ru.rogzy.api.retrofit.LoginRetrofit;
+import ru.rogzy.api.retrofit.RegisterRetrofit;
+import ru.rogzy.api.retrofit.ResourceRetrofit;
 import ru.rogzy.api.retrofit.UsersRetrofit;
 import ru.rogzy.api.util.UtilSteps;
 
@@ -22,8 +25,23 @@ public class CommonModule extends AbstractModule {
     }
 
     @Provides
-    public UsersRetrofit getReqResRetrofit(NetSteps steps, Cfg cfg) {
+    public UsersRetrofit getUsersRetrofit(NetSteps steps, Cfg cfg) {
         return steps.createRetrofit(cfg, UsersRetrofit.class);
+    }
+
+    @Provides
+    public ResourceRetrofit getResourceRetrofit(NetSteps steps, Cfg cfg) {
+        return steps.createRetrofit(cfg, ResourceRetrofit.class);
+    }
+
+    @Provides
+    public RegisterRetrofit getRegisterRetrofit(NetSteps steps, Cfg cfg) {
+        return steps.createRetrofit(cfg, RegisterRetrofit.class);
+    }
+
+    @Provides
+    public LoginRetrofit getLoginRetrofit(NetSteps steps, Cfg cfg) {
+        return steps.createRetrofit(cfg, LoginRetrofit.class);
     }
 
     @Provides

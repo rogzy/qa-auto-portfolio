@@ -6,8 +6,10 @@ public class ApiModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        this.install(new RequestModule());
-        this.install(new ResponseModule());
+        this.install(new UsersModule());
+        this.install(new ResourceModule());
+        this.install(new RegisterModule());
+        this.install(new LoginModule());
         this.install(new CommonModule());
     }
 }

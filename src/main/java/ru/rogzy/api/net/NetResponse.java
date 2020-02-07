@@ -2,8 +2,9 @@ package ru.rogzy.api.net;
 
 import lombok.Data;
 import okhttp3.Headers;
-import okhttp3.ResponseBody;
 import retrofit2.Response;
+
+import java.io.IOException;
 
 @Data
 public class NetResponse<T> {
@@ -12,7 +13,7 @@ public class NetResponse<T> {
     Headers headers;
     T body;
     okhttp3.Response raw;
-    ResponseBody errorBody;
+    String errorBody;
 
     public NetResponse(Response<T> response) {
         code = response.code();
@@ -22,7 +23,11 @@ public class NetResponse<T> {
             body = response.body();
         } else {
             raw = response.raw();
-            errorBody = response.errorBody();
+            try {
+                errorBody = response.errorBody() != null ? response.errorBody().string() : "";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
