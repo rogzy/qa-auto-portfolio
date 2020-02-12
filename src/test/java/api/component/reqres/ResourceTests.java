@@ -1,4 +1,4 @@
-package component.reqres;
+package api.component.reqres;
 
 import com.google.inject.Inject;
 import org.junit.jupiter.api.DisplayName;

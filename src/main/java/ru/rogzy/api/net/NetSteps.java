@@ -42,7 +42,7 @@ public class NetSteps {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-        return createRetrofit(cfg.url(), okHttpClient, zClass);
+        return createRetrofit(cfg.apiUrl(), okHttpClient, zClass);
     }
 
 

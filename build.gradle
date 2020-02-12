@@ -46,6 +46,9 @@ dependencies {
 
     //JUnit 5 Extension
     implementation 'name.falgout.jeffrey.testing.junit5:guice-extension:1.1.1'
+
+    //selenide
+    testCompile 'com.codeborne:selenide:5.7.0'
 }
 
 def setTestProperty(String prop, Object value) {
