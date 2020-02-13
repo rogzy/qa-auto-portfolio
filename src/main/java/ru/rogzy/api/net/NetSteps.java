@@ -8,7 +8,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.rogzy.api.config.Cfg;
+import ru.rogzy.api.config.ApiCfg;
 import ru.rogzy.api.core.expceptions.CoreException;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class NetSteps {
         return retrofit.create(zClass);
     }
 
-    public <T> T createRetrofit(Cfg cfg, Class<T> zClass) {
+    public <T> T createRetrofit(ApiCfg cfg, Class<T> zClass) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         if (cfg.debugMode()) {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -42,7 +42,7 @@ public class NetSteps {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-        return createRetrofit(cfg.url(), okHttpClient, zClass);
+        return createRetrofit(cfg.apiUrl(), okHttpClient, zClass);
     }
 
 

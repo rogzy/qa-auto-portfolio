@@ -1,8 +1,7 @@
-package component.reqres;
+package api.component.reqres;
 
 import com.google.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
 import ru.rogzy.api.aut.reqres.user.create.CreateUserRequest;
@@ -14,9 +13,9 @@ import ru.rogzy.api.aut.reqres.user.get_list.GetListUsersResponse;
 import ru.rogzy.api.aut.reqres.user.get_obj.GetUserSingleResponse;
 import ru.rogzy.api.aut.reqres.user.update.UpdateUserRequest;
 import ru.rogzy.api.aut.reqres.user.update.UpdateUserResponse;
-import ru.rogzy.api.core.annotations.Api;
-import ru.rogzy.api.core.annotations.Delay;
-import ru.rogzy.api.core.annotations.Simple;
+import ru.rogzy.api.core.annotations.api.Api;
+import ru.rogzy.api.core.annotations.api.Delay;
+import ru.rogzy.api.core.annotations.api.Simple;
 import ru.rogzy.api.net.NetSteps;
 import ru.rogzy.api.retrofit.UsersRetrofit;
 import ru.rogzy.api.util.UtilSteps;
@@ -75,7 +74,7 @@ class UsersTests {
 
     @Test
 
-    @DisplayName("Получение информации о не существующего пользователе")
+    @DisplayName("Получение информации о не существующем пользователе")
     void checkNotExistSingleUser(UsersRetrofit api,
                                  NetSteps steps,
                                  GetUserSingleResponse expected) {
@@ -84,7 +83,6 @@ class UsersTests {
     }
 
     @Test
-    @Tag("qa")
     @DisplayName("Получение информации о списке пользователей на указанной странице")
     void checkListUser(UsersRetrofit api,
                        NetSteps steps,
@@ -94,7 +92,6 @@ class UsersTests {
     }
 
     @Test
-    @Tag("qa")
     @DisplayName("Получение информации о списке пользователей с задержкой")
     void checkListUserWithDelay(UsersRetrofit api,
                        NetSteps steps,

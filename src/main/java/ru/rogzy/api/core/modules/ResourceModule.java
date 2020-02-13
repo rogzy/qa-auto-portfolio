@@ -5,8 +5,8 @@ import com.google.inject.Provides;
 import ru.rogzy.api.aut.reqres.StateEnum;
 import ru.rogzy.api.aut.reqres.resource.get_list.GetListResourceResponse;
 import ru.rogzy.api.aut.reqres.resource.get_obj.GetSingleResourceResponse;
-import ru.rogzy.api.core.annotations.NotExist;
-import ru.rogzy.api.core.annotations.Single;
+import ru.rogzy.api.core.annotations.api.NotExist;
+import ru.rogzy.api.core.annotations.api.Single;
 
 public class ResourceModule extends AbstractModule {
 

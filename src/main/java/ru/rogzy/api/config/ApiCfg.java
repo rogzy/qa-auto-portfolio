@@ -2,10 +2,10 @@ package ru.rogzy.api.config;
 
 import org.aeonbits.owner.Reloadable;
 
-public interface Cfg extends Reloadable {
+public interface ApiCfg extends Reloadable {
 
     @DefaultValue("https://reqres.in/api/")
-    String url();
+    String apiUrl();
 
     @DefaultValue("false")
     @Key("debug.mode")
