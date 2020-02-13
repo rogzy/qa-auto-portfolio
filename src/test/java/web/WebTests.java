@@ -8,10 +8,10 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import ru.rogzy.api.config.Cfg;
 import ru.rogzy.api.core.annotations.web.Education;
 import ru.rogzy.api.core.annotations.web.Web;
 import ru.rogzy.api.core.annotations.web.WhoWeServe;
+import ru.rogzy.web.config.WebCfg;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -24,7 +24,7 @@ class WebTests {
     final String EDUCATION = "Education";
 
     @Inject
-    Cfg cfg;
+    WebCfg cfg;
 
     @BeforeAll
     static void setUp() {
@@ -65,7 +65,7 @@ class WebTests {
         textInput().pressEnter();
         closePopUpWindow();
         ElementsCollection products = $$(By.xpath("//div[@class='products-list']/section"));
-        products.iterator().forEachRemaining(el -> el.$(titleProduct).shouldHave(Condition.matchText("Java")));
+        products.iterator().forEachRemaining(el -> el.$(titleProduct).shouldHave(Condition.matchText(cfg.textForSearch())));
     }
 
     @Test
