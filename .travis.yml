@@ -1,9 +1,12 @@
 language: java
 
-sudo: true
+sudo: false
 
 jdk:
 - openjdk8
+
+before_install:
+- chmod +x gradlew
 
 notifications:
   email:
