@@ -1,0 +1,13 @@
+language: java
+
+sudo: false
+
+jdk:
+- openjdk8
+
+notifications:
+  email:
+    recipients:
+      - rogzy1606@gmail.com
+    on_success: never
+    on_failure: always
