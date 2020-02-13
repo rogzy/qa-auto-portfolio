@@ -5,11 +5,15 @@ sudo: false
 jdk:
 - openjdk8
 
+env:
+  - debug.mode=true
+
 before_install:
 - chmod +x gradlew
 
 script:
-  - ./gradlew clean test -Pci.tags.exclude=!api --debug
+  - ./gradlew clean test -Pci.tags.exclude=!api
+  - ./gradlew clean test -Pci.tags.exclude=!web
 
 notifications:
   email:
