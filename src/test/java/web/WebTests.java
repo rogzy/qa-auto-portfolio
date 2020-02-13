@@ -1,18 +1,12 @@
 package web;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import com.google.inject.Inject;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import ru.rogzy.api.config.Cfg;
 import ru.rogzy.api.core.annotations.web.Education;
@@ -31,6 +25,11 @@ class WebTests {
 
     @Inject
     Cfg cfg;
+
+    @BeforeAll
+    static void setUp() {
+        Configuration.startMaximized = true;
+    }
 
     @BeforeEach
     void before() {
