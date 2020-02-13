@@ -7,21 +7,27 @@ import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Inject;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import ru.rogzy.api.config.Cfg;
-import ru.rogzy.api.core.annotations.Web;
+import ru.rogzy.api.core.annotations.web.Education;
+import ru.rogzy.api.core.annotations.web.Web;
+import ru.rogzy.api.core.annotations.web.WhoWeServe;
 
-import java.util.Arrays;
-
-import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.*;
 
 @Web
-public class WebTests {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+class WebTests {
+
+    final String WHO_WE_SERVE = "Who we serve";
+    final String SUBJECTS = "Subjects";
+    final String EDUCATION = "Education";
 
     @Inject
     Cfg cfg;
@@ -31,95 +37,82 @@ public class WebTests {
         init();
     }
 
-    @Test
-    @DisplayName("Подменю Who We Serve")
-    @Description("detected bug")
-    void checkItemsSubMenu() {
-        hoverSubMenu("Who we serve");
-        ElementsCollection actual = $$(By.xpath("//a[contains(text(),'WHO WE SERVE')]/parent::*/div/ul/li/a"));
+    @AfterEach
+    void after() {
+        closeWebDriver();
+    }
 
-        CollectionCondition expected = exactTexts(Arrays.asList(
-                "Students",
-                "Instructors",
-                "Book Authors",
-                "Professionals",
-                "Researchers",
-                "Institutions",
-                "Librarians",
-                "Corporations",
-                "Societies",
-                "Journal Editors",
-                "Government"));
+    @Test
+    @DisplayName("Состав подменю 'Who We Serve'")
+    @Description("detected bug")
+    void checkItemsSubMenu(@WhoWeServe CollectionCondition expected) {
+        By subMenuList = By.xpath("./parent::*/div/ul/li/a");
+        hoverSubMenu(WHO_WE_SERVE);
+        ElementsCollection actual = getSubMenu(WHO_WE_SERVE).findAll(subMenuList);
         actual.shouldHave(expected);
     }
 
     @Test
-    @DisplayName("Отображение превью")
+    @DisplayName("Отображение превью после ввода текста")
     void checkSearchPreview() {
-        $(By.xpath("//input[@type='search']")).setValue(cfg.textForSearch());
+        textInput();
         $$(By.xpath("//aside[contains(@class, 'ui-widget')]/section/div/*")).first().isDisplayed();
     }
 
     @Test
-    @DisplayName("Search functionality")
+    @DisplayName("Заголовки найденых продуктов содержат поисковую фразу")
     void checkResultSearch() {
-        $(By.xpath("//input[@type='search']")).setValue(cfg.textForSearch()).pressEnter();
-
-        closeAnnoyingWindow();
-
+        By titleProduct = By.xpath(".//h3//span");
+        textInput().pressEnter();
+        closePopUpWindow();
         ElementsCollection products = $$(By.xpath("//div[@class='products-list']/section"));
-
-        products.iterator().forEachRemaining(el -> el.$(By.xpath(".//h3//span")).shouldHave(Condition.matchText("Java")));
+        products.iterator().forEachRemaining(el -> el.$(titleProduct).shouldHave(Condition.matchText("Java")));
     }
 
     @Test
-    @Tag("qa")
-    @DisplayName("Subjects in Education")
-    void checkItemsSectionEducation() {
-        hoverSubMenu("SUBJECTS");
-
-        hoverSectionMenu();
-
-        ElementsCollection actual = $$(By.xpath("//ul//*[contains(text(),'Education')]/following-sibling::*//a"));
-
-        CollectionCondition expected = exactTexts(Arrays.asList(
-                "Assessment, Evaluation Methods",
-                "Classroom Management",
-                "Conflict Resolution & Mediation",
-                "Curriculum Tools",
-                "Education & Public Policy",
-                "Educational Research",
-                "General Education",
-                "Higher Education",
-                "Information & Library Science",
-                "Special Education",
-                "Special Topics",
-                "Vocational Technology"));
-
+    @DisplayName("Состав секции 'Education'")
+    void checkItemsSectionEducation(@Education CollectionCondition expected) {
+        By sectionList = By.xpath("./following-sibling::*//a");
+        hoverSubMenu(SUBJECTS);
+        hoverSectionInSubMenu(SUBJECTS, EDUCATION);
+        ElementsCollection actual = getSection(EDUCATION).findAll(sectionList);
         actual.shouldHave(expected);
-    }
-
-    @Step
-    private void closeAnnoyingWindow() {
-        $(By.xpath("//form[@class='country-location-form']//button[@class='close']")).click();
-    }
-
-    @Step
-    private SelenideElement hoverSubMenu(String name) {
-        return $(By.xpath("//a[contains(text(),'" + name.toUpperCase() + "')]")).hover();
-    }
-
-    @Step
-    private void hoverSectionMenu() {
-        hoverSubMenu("Subjects");
-        SelenideElement element = $(By.xpath("//ul//*[contains(text(),'Education')]"));
-        element.waitUntil(Condition.visible, 5000, 500).hover();
     }
 
     @Step
     private void init() {
         open(cfg.webUrl());
-        closeAnnoyingWindow();
+        closePopUpWindow();
+    }
+
+    @Step
+    private void closePopUpWindow() {
+        $(By.xpath("//form[@class='country-location-form']//button[@class='close']")).click();
+    }
+
+    @Step
+    private SelenideElement textInput() {
+        return $(By.xpath("//input[@type='search']")).setValue(cfg.textForSearch());
+    }
+
+    @Step
+    private SelenideElement hoverSubMenu(String subMenuName) {
+        return getSubMenu(subMenuName).hover();
+    }
+
+    @Step
+    private void hoverSectionInSubMenu(String subMenuName, String sectionName) {
+        hoverSubMenu(subMenuName);
+        SelenideElement element = getSection(sectionName);
+        element.waitUntil(Condition.visible, 5000, 500).hover();
+    }
+
+    private SelenideElement getSubMenu(String subMenuName) {
+        return $(By.xpath("//a[contains(text(),'" + subMenuName.toUpperCase() + "')]"));
+    }
+
+    private SelenideElement getSection(String sectionName) {
+        return $(By.xpath("//ul//*[contains(text(),'" + sectionName + "')]"));
     }
 
 }

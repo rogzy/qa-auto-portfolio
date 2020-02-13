@@ -5,8 +5,8 @@ import com.google.inject.Provides;
 import ru.rogzy.api.aut.reqres.StateEnum;
 import ru.rogzy.api.aut.reqres.login.LoginRequest;
 import ru.rogzy.api.aut.reqres.login.LoginResponse;
-import ru.rogzy.api.core.annotations.Success;
-import ru.rogzy.api.core.annotations.Unsuccess;
+import ru.rogzy.api.core.annotations.api.Success;
+import ru.rogzy.api.core.annotations.api.Unsuccess;
 
 public class LoginModule extends AbstractModule {
     @Override

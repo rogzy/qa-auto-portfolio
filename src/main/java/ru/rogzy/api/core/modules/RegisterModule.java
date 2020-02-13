@@ -5,8 +5,8 @@ import com.google.inject.Provides;
 import ru.rogzy.api.aut.reqres.StateEnum;
 import ru.rogzy.api.aut.reqres.register.RegisterRequest;
 import ru.rogzy.api.aut.reqres.register.RegisterResponse;
-import ru.rogzy.api.core.annotations.Success;
-import ru.rogzy.api.core.annotations.Unsuccess;
+import ru.rogzy.api.core.annotations.api.Success;
+import ru.rogzy.api.core.annotations.api.Unsuccess;
 
 public class RegisterModule extends AbstractModule {
     @Override

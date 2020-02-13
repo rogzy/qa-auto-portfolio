@@ -1,8 +1,9 @@
-package ru.rogzy.api.core.annotations;
+package ru.rogzy.api.core.annotations.api;
+
 
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;
 import org.junit.jupiter.api.Tag;
-import ru.rogzy.api.core.modules.WebModule;
+import ru.rogzy.api.core.modules.ApiModule;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
@@ -17,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 @Inherited
-@Tag("web")
-@IncludeModule(WebModule.class)
-public @interface Web {
+@Tag("api")
+@IncludeModule(ApiModule.class)
+public @interface Api {
 }

@@ -1,5 +1,4 @@
-package ru.rogzy.api.core.annotations;
-
+package ru.rogzy.api.core.annotations.api;
 
 import com.google.inject.BindingAnnotation;
 
@@ -13,5 +12,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @BindingAnnotation
 @Retention(RUNTIME)
 @Target({PARAMETER, METHOD})
-public @interface Simple {
+public @interface Single {
 }

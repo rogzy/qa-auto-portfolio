@@ -12,8 +12,8 @@ import ru.rogzy.api.aut.reqres.user.get_obj.GetUserSingleResponse;
 import ru.rogzy.api.aut.reqres.user.get_obj.UserData;
 import ru.rogzy.api.aut.reqres.user.update.UpdateUserRequest;
 import ru.rogzy.api.aut.reqres.user.update.UpdateUserResponse;
-import ru.rogzy.api.core.annotations.Delay;
-import ru.rogzy.api.core.annotations.Simple;
+import ru.rogzy.api.core.annotations.api.Delay;
+import ru.rogzy.api.core.annotations.api.Simple;
 
 public class UsersModule extends AbstractModule {
 
