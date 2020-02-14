@@ -1,0 +1,26 @@
+language: java
+
+sudo: false
+
+jdk:
+- openjdk8
+
+env:
+  - debug.mode=true
+
+before_install:
+- chmod +x gradlew
+
+script:
+  - ./gradlew clean
+  - ./gradlew test -Pci.tags.exclude=!api
+
+notifications:
+  email:
+    recipients:
+      - rogzy1606@gmail.com
+    on_success: never
+    on_failure: always
+
+addons:
+  artifacts: true
