@@ -1,6 +1,9 @@
 package api.component.reqres;
 
 import com.google.inject.Inject;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
@@ -20,7 +23,10 @@ import ru.rogzy.api.net.NetSteps;
 import ru.rogzy.api.retrofit.UsersRetrofit;
 import ru.rogzy.api.util.UtilSteps;
 
+@Epic("ReqRes")
 @Api
+@Feature("Управление информацией о пользователях")
+@Owner("Александр")
 class UsersTests {
 
     @Inject

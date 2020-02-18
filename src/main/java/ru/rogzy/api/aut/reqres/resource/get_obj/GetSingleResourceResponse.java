@@ -13,10 +13,10 @@ public class GetSingleResourceResponse {
 
     public GetSingleResourceResponse(StateEnum stateEnum) {
         switch (stateEnum) {
-            case single:
+            case SINGLE:
                 this.data = new ResourceData();
                 break;
-            case notExist:
+            case NOT_EXIST:
                 this.data = null;
                 break;
             default:

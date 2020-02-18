@@ -16,25 +16,25 @@ public class LoginModule extends AbstractModule {
     @Provides
     @Success
     LoginRequest getSuccessLoginRequest() {
-        return new LoginRequest(StateEnum.success);
+        return new LoginRequest(StateEnum.SUCCESS);
     }
 
     @Provides
     @Unsuccess
     LoginRequest getUnsuccessLoginRequest() {
-        return new LoginRequest(StateEnum.unsuccess);
+        return new LoginRequest(StateEnum.UNSUCCESS);
     }
 
     @Provides
     @Success
     LoginResponse getSuccessLoginResponse() {
-        return new LoginResponse(StateEnum.success);
+        return new LoginResponse(StateEnum.SUCCESS);
     }
 
 
     @Provides
     @Unsuccess
     LoginResponse getUnsuccessLoginResponse() {
-        return new LoginResponse(StateEnum.unsuccess);
+        return new LoginResponse(StateEnum.UNSUCCESS);
     }
 }

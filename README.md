@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rogzy/qa-auto-portfolio.svg?branch=master)](https://travis-ci.org/rogzy/qa-auto-portfolio)
+
 Демонстрационный проект
 
 # 1. Краткое описание

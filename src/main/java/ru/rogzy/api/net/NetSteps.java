@@ -1,5 +1,6 @@
 package ru.rogzy.api.net;
 
+import io.qameta.allure.okhttp3.AllureOkHttp3;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import okhttp3.OkHttpClient;
@@ -36,11 +37,13 @@ public class NetSteps {
 
     public <T> T createRetrofit(ApiCfg cfg, Class<T> zClass) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        AllureOkHttp3 allureOkHttp3 = new AllureOkHttp3();
         if (cfg.debugMode()) {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         }
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(allureOkHttp3)
                 .build();
         return createRetrofit(cfg.apiUrl(), okHttpClient, zClass);
     }

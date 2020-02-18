@@ -14,11 +14,11 @@ public class RegisterRequest {
 
     public RegisterRequest(StateEnum stateEnum) {
         switch (stateEnum) {
-            case success:
+            case SUCCESS:
                 this.email = "eve.holt@reqres.in";
                 this.password = "pistol";
                 break;
-            case unsuccess:
+            case UNSUCCESS:
                 this.email = "sydney@fife";
                 this.password = null;
                 break;
