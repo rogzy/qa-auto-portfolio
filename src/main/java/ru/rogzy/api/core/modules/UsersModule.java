@@ -58,13 +58,13 @@ public class UsersModule extends AbstractModule {
     @Provides
     @Delay
     public GetListUsersResponse getListUsersResponseWithDelay() {
-        return new GetListUsersResponse(StateEnum.delay);
+        return new GetListUsersResponse(StateEnum.DELAY);
     }
 
     @Provides
     @Simple
     public GetListUsersResponse getListUsersResponse() {
-        return new GetListUsersResponse(StateEnum.simple);
+        return new GetListUsersResponse(StateEnum.SIMPLE);
     }
 
     @Provides

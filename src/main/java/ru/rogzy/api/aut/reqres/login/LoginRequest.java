@@ -14,11 +14,11 @@ public class LoginRequest {
 
     public LoginRequest(StateEnum stateEnum) {
         switch (stateEnum) {
-            case success:
+            case SUCCESS:
                 this.email = "eve.holt@reqres.in";
                 this.password = "cityslicka";
                 break;
-            case unsuccess:
+            case UNSUCCESS:
                 this.email = "peter@klaven";
                 this.password = null;
                 break;

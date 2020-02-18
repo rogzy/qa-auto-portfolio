@@ -15,12 +15,12 @@ public class RegisterResponse {
 
     public RegisterResponse(StateEnum stateEnum) {
         switch (stateEnum) {
-            case success:
+            case SUCCESS:
                 this.id = 4;
                 this.token = "QpwL5tke4Pnpja7X4";
                 this.error = null;
                 break;
-            case unsuccess:
+            case UNSUCCESS:
                 this.id = null;
                 this.token = null;
                 this.error = "Missing password";

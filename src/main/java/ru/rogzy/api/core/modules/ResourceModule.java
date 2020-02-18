@@ -22,13 +22,13 @@ public class ResourceModule extends AbstractModule {
     @Provides
     @NotExist
     public GetSingleResourceResponse getNotExistResourceResponse() {
-        return new GetSingleResourceResponse(StateEnum.notExist);
+        return new GetSingleResourceResponse(StateEnum.NOT_EXIST);
     }
 
     @Provides
     @Single
     public GetSingleResourceResponse getSingleResourceResponse() {
-        return new GetSingleResourceResponse(StateEnum.single);
+        return new GetSingleResourceResponse(StateEnum.SINGLE);
     }
 
 }

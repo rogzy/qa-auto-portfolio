@@ -25,10 +25,10 @@ public class GetListUsersResponse {
         this.total_pages = 2;
         this.data = null;
         switch (stateEnum) {
-            case simple:
+            case SIMPLE:
                 this.page = 2;
                 break;
-            case delay:
+            case DELAY:
                 this.page = 1;
                 break;
             default:

@@ -16,25 +16,25 @@ public class RegisterModule extends AbstractModule {
     @Provides
     @Success
     RegisterRequest getSuccessRegisterRequest() {
-        return new RegisterRequest(StateEnum.success);
+        return new RegisterRequest(StateEnum.SUCCESS);
     }
 
     @Provides
     @Unsuccess
     RegisterRequest getUnsuccessRegisterRequest() {
-        return new RegisterRequest(StateEnum.unsuccess);
+        return new RegisterRequest(StateEnum.UNSUCCESS);
     }
 
     @Provides
     @Success
     RegisterResponse getSuccessRegisterResponse() {
-        return new RegisterResponse(StateEnum.success);
+        return new RegisterResponse(StateEnum.SUCCESS);
     }
 
 
     @Provides
     @Unsuccess
     RegisterResponse getUnsuccessRegisterResponse() {
-        return new RegisterResponse(StateEnum.unsuccess);
+        return new RegisterResponse(StateEnum.UNSUCCESS);
     }
 }

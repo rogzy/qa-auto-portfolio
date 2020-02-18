@@ -14,11 +14,11 @@ public class LoginResponse {
 
     public LoginResponse(StateEnum stateEnum) {
         switch (stateEnum) {
-            case success:
+            case SUCCESS:
                 this.token = "QpwL5tke4Pnpja7X4";
                 this.error = null;
                 break;
-            case unsuccess:
+            case UNSUCCESS:
                 this.token = null;
                 this.error = "Missing password";
                 break;

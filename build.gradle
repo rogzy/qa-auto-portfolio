@@ -49,6 +49,15 @@ dependencies {
 
     //selenide
     implementation 'com.codeborne:selenide:5.7.0'
+    
+    //allure
+    testRuntimeOnly 'io.qameta.allure:allure-junit5:2.13.1'
+    //Добавляет в репорт запросы и ответы
+    implementation 'io.qameta.allure:allure-okhttp3:2.10.0'
+    //Добавляет в репорт скриншоты в момент подения теста
+    testImplementation 'io.qameta.allure:allure-selenide:2.13.1'
+    //TODO  Добавляет в репорт diff json (донастроить)
+    testImplementation 'io.qameta.allure:allure-jsonunit:2.13.1'
 }
 
 def setTestProperty(String prop, Object value) {
@@ -64,6 +73,12 @@ def setTestProperties() {
 }
 
 test {
+    systemProperties = [
+            'junit.jupiter.execution.parallel.enabled': 'true',
+            'junit.jupiter.execution.parallel.mode.default': 'CONCURRENT',
+            'junit.jupiter.execution.parallel.mode.classes.default': 'SAME_THREAD'
+    ]
+
     setTestProperties()
     useJUnitPlatform {
         def splitter = "&"
@@ -79,10 +94,15 @@ test {
 }
 
 allure {
-    autoconfigure = true
     version = '2.7.0'
-    
+    autoconfigure = true
+
     useJUnit5 {
         version = '2.7.0'
     }
+}
+
+task copyAllureHelpersToTestResult(type: Copy) {
+    from 'src/test/resources'
+    into  'build/allure-results'
 }
