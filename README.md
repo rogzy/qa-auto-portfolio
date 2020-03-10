@@ -27,3 +27,5 @@ WEB - wiley.com
 * di: guice 4.2.2
 * report: Allure 2.0
 * logger: slf4j
+
+Видео: https://vimeo.com/396728806
